@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Verify an OnSiteSeal proof pack in your browser. Files stay on your device — nothing is uploaded."
+    />
+    <title>OnSiteSeal — Verify proof</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./verify.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="brand">
+        <p class="brand-name">OnSiteSeal</p>
+        <h1>Verify a sealed photo</h1>
+        <p class="lede">
+          Sealed on site. Verifiable anywhere. Checks run entirely in your browser —
+          we never receive your files.
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="drop-heading">
+        <h2 id="drop-heading">Drop a proof pack</h2>
+        <p class="hint">
+          Use the zip from the app, or pick the JPEG and <code>.receipt.json</code> separately.
+        </p>
+
+        <label class="file-field">
+          <span class="file-label">Proof pack (.zip)</span>
+          <input id="zipInput" type="file" accept=".zip,application/zip" />
+        </label>
+
+        <div class="or" role="separator">or</div>
+
+        <div class="dual">
+          <label class="file-field">
+            <span class="file-label">Photo (.jpg)</span>
+            <input id="jpegInput" type="file" accept="image/jpeg,.jpg,.jpeg" />
+          </label>
+          <label class="file-field">
+            <span class="file-label">Receipt (.json)</span>
+            <input id="receiptInput" type="file" accept="application/json,.json" />
+          </label>
+        </div>
+
+        <button id="verifyBtn" type="button" class="cta" disabled>Verify</button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="result" class="result" hidden aria-live="polite"></section>
+
+      <footer class="foot">
+        <p>
+          What this proves: the JPEG bytes match the receipt hash, and the receipt was signed
+          with the device key embedded in the receipt.
+        </p>
+        <p>
+          What it does <strong>not</strong> prove: that the camera was pointed at a particular
+          subject, or that GPS could not be spoofed on a compromised device.
+        </p>
+        <p>
+          <a href="https://github.com/mhamzaib/onsiteseal/blob/master/docs/VERIFY.md"
+            >Recipient guide</a
+          >
+          ·
+          <a href="https://github.com/mhamzaib/onsiteseal">Source</a>
+        </p>
+      </footer>
+    </main>
+    <script type="module" src="./verify.js"></script>
+  </body>
+</html>

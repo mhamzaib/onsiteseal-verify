@@ -1,0 +1,266 @@
+:root {
+  --ink: #0b1220;
+  --steel: #0b6e99;
+  --steel-pressed: #085578;
+  --bg-deep: #d5dee8;
+  --bg: #e8eef4;
+  --surface: #f7fafc;
+  --raised: #ffffff;
+  --secondary: #3d4f63;
+  --border: #b8c5d4;
+  --success: #1b7a45;
+  --danger: #c0392b;
+  --warning: #9a6700;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --sans: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.45;
+}
+
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg) 45%, var(--surface) 100%);
+  z-index: -1;
+}
+
+.shell {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.brand-name {
+  margin: 0 0 0.5rem;
+  font-weight: 800;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.lede {
+  margin: 0;
+  color: var(--secondary);
+  font-size: 1rem;
+  max-width: 34rem;
+}
+
+.panel {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background: var(--raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.panel h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.hint {
+  margin: 0 0 1.25rem;
+  color: var(--secondary);
+  font-size: 0.92rem;
+}
+
+.hint code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
+
+.file-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.file-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+input[type="file"] {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  font-family: var(--sans);
+  font-size: 0.95rem;
+}
+
+.dual {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 540px) {
+  .dual {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.or {
+  margin: 0.75rem 0 1rem;
+  text-align: center;
+  color: var(--secondary);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--steel);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cta:hover:not(:disabled) {
+  background: var(--steel-pressed);
+}
+
+.cta:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.status {
+  margin: 0.85rem 0 0;
+  min-height: 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+.result {
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--raised);
+}
+
+.result.pass {
+  border-color: var(--success);
+  box-shadow: inset 4px 0 0 var(--success);
+}
+
+.result.fail {
+  border-color: var(--danger);
+  box-shadow: inset 4px 0 0 var(--danger);
+}
+
+.result h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.15rem;
+}
+
+.result dl {
+  margin: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.result dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--secondary);
+}
+
+.result dd {
+  margin: 0.15rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  word-break: break-all;
+}
+
+.checks {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.checks li {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.checks .ok {
+  color: var(--success);
+}
+
+.checks .bad {
+  color: var(--danger);
+}
+
+.preview {
+  margin-top: 1rem;
+  max-width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.foot {
+  margin-top: 2rem;
+  color: var(--secondary);
+  font-size: 0.9rem;
+}
+
+.foot a {
+  color: var(--steel);
+  font-weight: 600;
+}
+
+.foot p {
+  margin: 0 0 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

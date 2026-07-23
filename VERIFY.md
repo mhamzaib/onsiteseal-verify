@@ -8,16 +8,12 @@ Anyone with a sealed photo pack can confirm integrity in a browser — no OnSite
 
 From the contractor (via **Share proof pack** in the app):
 
-- A zip containing:
-  - the sealed JPEG, and
-  - the matching `.receipt.json` sidecar
-
-Or the two files separately (same names pattern).
+- A zip containing the sealed JPEG and matching `.receipt.json`, **or**
+- Those two files separately
 
 ## Steps
 
-1. Open the verifier: [https://mhamzaib.github.io/onsiteseal-verify/verify/](https://mhamzaib.github.io/onsiteseal-verify/verify/)
-   - **Local:** from the repo root, `npx --yes serve web` then open `/verify/`
+1. Open https://mhamzaib.github.io/onsiteseal-verify/verify/
 2. Drop the zip **or** choose the JPEG + receipt JSON
 3. Tap **Verify**
 
@@ -35,29 +31,22 @@ If both pass, the photo bytes and claims have not been altered since sealing.
 | Hash match | This exact JPEG is the one named in the receipt |
 | Signature valid | Claims (time, GPS, job, hash, …) were signed by the device key in the receipt |
 
-Signing mode `software` means the key is device-protected storage + software Ed25519 (not a hardware secure element). That is still useful portable integrity — it is not a government-grade attestation.
+Signing mode `software` means device-protected key storage with software Ed25519 (not a hardware secure element). Useful portable integrity — not government-grade attestation.
 
 ## What verification does **not** prove
 
-- That the camera was pointed at a particular wall, meter, or person (“first-mile” / lens aiming)
-- That GPS could not be spoofed on a rooted, jailbroken, or otherwise compromised device
-- That the contractor’s wall clock was correct (network time hardening is a later epic)
-- Identity of the human who held the phone
+- That the camera was pointed at a particular subject
+- That GPS could not be spoofed on a compromised device
+- That the device clock was correct
+- Identity of the person who held the phone
 
-Use seals as strong documentary evidence, not as a substitute for judgment on site context.
+Use seals as strong documentary evidence, not a substitute for judgment on site context.
 
 ## BASIC vs SEALED
 
-- **BASIC** — photo saved; hash/sign failed or unsigned. Still useful documentation; not cryptographically sealed.
-- **SEALED** — hash + signature present. Use the verifier for independent checks.
+- **BASIC** — saved photo; unsigned or seal failed. Documentation only.
+- **SEALED** — hash + signature present. Use this verifier for independent checks.
 
 ## Privacy
 
-The static verifier runs in your browser with local files. OnSiteSeal does not receive the JPEG or receipt when you verify this way.
-
-## Links
-
-- Verifier: https://mhamzaib.github.io/onsiteseal-verify/verify/
-- Public site repo: https://github.com/mhamzaib/onsiteseal-verify
-- Source (app): https://github.com/mhamzaib/onsiteseal
-- Architecture notes: [`ARCHITECTURE.md`](ARCHITECTURE.md)
+Checks run in your browser with local files. OnSiteSeal does not receive the JPEG or receipt.

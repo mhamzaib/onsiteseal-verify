@@ -1,8 +1,10 @@
-# OnSiteSeal Verify (public mirror)
+# OnSiteSeal Verify
 
-Static browser verifier only. **No app source** in the published site.
+Static browser verifier for sealed proof packs.
 
-- Live: https://mhamzaib.github.io/onsiteseal-verify/verify/
-- This folder is synced from private `onsiteseal` → public `onsiteseal-verify` on change.
+**Live:** https://mhamzaib.github.io/onsiteseal-verify/verify/
 
-Files stay in the verifier's browser. We do not receive uploads.
+This repository contains **only** the published verifier site (HTML/CSS/JS).  
+It does **not** contain the OnSiteSeal mobile app or any private source.
+
+Files you select stay in your browser. Nothing is uploaded to our servers.

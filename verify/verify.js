@@ -177,9 +177,19 @@ function renderResult({ ok, photoHash, checks, receipt, jpegBytes, jpegName }) {
   resultEl.className = `result ${ok ? 'pass' : 'fail'}`;
   const blob = new Blob([jpegBytes], { type: 'image/jpeg' });
   const url = URL.createObjectURL(blob);
+  const gpsLabel = receipt.integritySignals?.gpsLabel ?? null;
+  const accuracy =
+    receipt.accuracyMeters != null && Number.isFinite(receipt.accuracyMeters)
+      ? `±${Math.round(receipt.accuracyMeters)}m`
+      : null;
 
   resultEl.innerHTML = `
-    <h2>${ok ? 'SEALED — verification passed' : 'Verification failed'}</h2>
+    <h2>${ok ? 'Checks passed' : 'Verification failed'}</h2>
+    <p class="result-lede">${
+      ok
+        ? 'Photo hash and signature match the receipt. Files stayed in this browser — nothing was uploaded.'
+        : 'One or more checks failed. See details below. Files stayed in this browser.'
+    }</p>
     <ul class="checks">
       ${checks
         .map((c) => `<li class="${c.ok ? 'ok' : 'bad'}">${c.ok ? 'PASS' : 'FAIL'} · ${escapeHtml(c.label)}</li>`)
@@ -189,10 +199,14 @@ function renderResult({ ok, photoHash, checks, receipt, jpegBytes, jpegName }) {
       <div><dt>Proof code</dt><dd>${escapeHtml(receipt.proofCode ?? '—')}</dd></div>
       <div><dt>Job ID</dt><dd>${escapeHtml(receipt.jobId ?? '—')}</dd></div>
       <div><dt>Captured</dt><dd>${escapeHtml(receipt.capturedAt ?? '—')}</dd></div>
+      <div><dt>Location stamp</dt><dd>${escapeHtml(
+        gpsLabel ? (accuracy ? `${gpsLabel} (${accuracy})` : gpsLabel) : '—',
+      )}</dd></div>
       <div><dt>Photo hash (SHA-256)</dt><dd>${escapeHtml(photoHash)}</dd></div>
       <div><dt>File</dt><dd>${escapeHtml(jpegName ?? 'photo.jpg')}</dd></div>
       <div><dt>Signing</dt><dd>${escapeHtml(receipt.signing ?? '—')}</dd></div>
     </dl>
+    <p class="result-note">A pass does not prove subject authenticity, unspoofable GPS, or court admissibility.</p>
     <img class="preview" alt="Selected proof photo" src="${url}" />
   `;
 }
@@ -228,7 +242,7 @@ async function runVerify() {
       jpegBytes: bundle.jpegBytes,
       jpegName: bundle.jpegName,
     });
-    setStatus(outcome.ok ? 'Done — files were not uploaded.' : 'Done — see failures above.');
+    setStatus(outcome.ok ? 'Done — verified locally; files were not uploaded.' : 'Done — see failures above.');
   } catch (err) {
     setStatus(err instanceof Error ? err.message : 'Verification failed');
     resultEl.hidden = false;

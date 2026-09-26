@@ -2,7 +2,7 @@
 
 **Sealed on site. Verifiable anywhere.**
 
-Anyone with a sealed photo pack can confirm integrity in a browser — no OnSiteSeal account, and **no upload to our servers**.
+Anyone with a sealed photo pack can confirm integrity in a browser — no OnSiteSeal account, and **no upload to our servers**. Checks are client-side and offline-capable once the page is loaded.
 
 ## What you need
 
@@ -15,7 +15,7 @@ From the contractor (via **Share proof pack** in the app):
 
 1. Open https://mhamzaib.github.io/onsiteseal-verify/verify/
 2. Drop the zip **or** choose the JPEG + receipt JSON
-3. Tap **Verify**
+3. Tap **Verify locally**
 
 The page checks:
 
@@ -24,14 +24,16 @@ The page checks:
 
 If both pass, the photo bytes and claims have not been altered since sealing.
 
-## What “SEALED” means
+## What “Locked in” / SEALED means
+
+**Locked in** in the app = cryptographic seal (hash + signature). That is separate from GPS quality stamped on the photo (`LOCATION CHECKED` / `WEAK` / `UNAVAILABLE`).
 
 | Passes | Meaning |
 |--------|---------|
 | Hash match | This exact JPEG is the one named in the receipt |
 | Signature valid | Claims (time, GPS, job, hash, …) were signed by the device key in the receipt |
 
-Signing mode `software` means device-protected key storage with software Ed25519 (not a hardware secure element). Useful portable integrity — not government-grade attestation.
+Signing mode `software` means device-protected key storage with software Ed25519 (not a hardware secure element). Useful portable integrity — **not ATTESTED**.
 
 ## What verification does **not** prove
 
@@ -39,13 +41,15 @@ Signing mode `software` means device-protected key storage with software Ed25519
 - That GPS could not be spoofed on a compromised device
 - That the device clock was correct
 - Identity of the person who held the phone
+- Hardware / app attestation
+- Automatic court admissibility
 
 Use seals as strong documentary evidence, not a substitute for judgment on site context.
 
-## BASIC vs SEALED
+## Saved only vs Locked in
 
-- **BASIC** — saved photo; unsigned or seal failed. Documentation only.
-- **SEALED** — hash + signature present. Use this verifier for independent checks.
+- **Saved only (BASIC)** — saved photo; unsigned or seal failed. Documentation only.
+- **Locked in (SEALED)** — hash + signature present. Use this verifier for independent checks.
 
 ## Privacy
 

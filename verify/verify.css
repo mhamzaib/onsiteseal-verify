@@ -194,6 +194,18 @@ input[type="file"] {
   font-size: 1.15rem;
 }
 
+.result-lede {
+  margin: 0 0 0.75rem;
+  color: var(--secondary);
+  font-size: 0.95rem;
+}
+
+.result-note {
+  margin: 1rem 0 0;
+  color: var(--secondary);
+  font-size: 0.85rem;
+}
+
 .result dl {
   margin: 0;
   display: grid;

@@ -1,10 +1,12 @@
-# OnSiteSeal Verify
+# OnSiteSeal Verify (+ privacy)
 
-Static browser verifier for sealed proof packs.
+Static browser verifier for sealed proof packs, plus privacy policy HTML for Play hosting.
 
-**Live:** https://mhamzaib.github.io/onsiteseal-verify/verify/
+**Live verifier:** https://mhamzaib.github.io/onsiteseal-verify/verify/
 
-This repository contains **only** the published verifier site (HTML/CSS/JS).  
+**Privacy (publish with this site):** `privacy/` → expected Pages path `…/privacy/` after sync. Do not invent a live URL until that path is actually deployed.
+
+This published tree contains **only** static site files (HTML/CSS/JS/md).  
 It does **not** contain the OnSiteSeal mobile app or any private source.
 
-Files you select stay in your browser. Nothing is uploaded to our servers.
+Verifier: files you select stay in your browser. Nothing is uploaded to our servers.

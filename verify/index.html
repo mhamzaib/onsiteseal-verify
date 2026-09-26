@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Verify an OnSiteSeal proof pack in your browser. Files stay on your device — nothing is uploaded."
+      content="Verify an OnSiteSeal proof pack offline in your browser. Files stay on your device — nothing is uploaded to OnSiteSeal."
     />
     <title>OnSiteSeal — Verify proof</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,15 +23,16 @@
         <p class="brand-name">OnSiteSeal</p>
         <h1>Verify a sealed photo</h1>
         <p class="lede">
-          Sealed on site. Verifiable anywhere. Checks run entirely in your browser —
-          we never receive your files.
+          Sealed on site. Verifiable anywhere. Hash and signature checks run entirely in your
+          browser — offline-capable, no account, and we never receive your files.
         </p>
       </header>
 
       <section class="panel" aria-labelledby="drop-heading">
         <h2 id="drop-heading">Drop a proof pack</h2>
         <p class="hint">
-          Use the zip from the app, or pick the JPEG and <code>.receipt.json</code> separately.
+          Use the zip from <strong>Share proof pack</strong> in the app, or pick the JPEG and
+          <code>.receipt.json</code> separately. Nothing is sent to OnSiteSeal.
         </p>
 
         <label class="file-field">
@@ -52,7 +53,7 @@
           </label>
         </div>
 
-        <button id="verifyBtn" type="button" class="cta" disabled>Verify</button>
+        <button id="verifyBtn" type="button" class="cta" disabled>Verify locally</button>
         <p id="status" class="status" role="status" aria-live="polite"></p>
       </section>
 
@@ -60,15 +61,22 @@
 
       <footer class="foot">
         <p>
-          What this proves: the JPEG bytes match the receipt hash, and the receipt was signed
-          with the device key embedded in the receipt.
+          What a pass proves: the JPEG bytes match the receipt hash (SHA-256), and the receipt
+          claims were signed with the device key embedded in the receipt (Ed25519).
         </p>
         <p>
-          What it does <strong>not</strong> prove: that the camera was pointed at a particular
-          subject, or that GPS could not be spoofed on a compromised device.
+          What it does <strong>not</strong> prove: what the camera was pointed at, that GPS could
+          not be spoofed on a compromised device, that the clock was correct, who held the phone,
+          hardware attestation, or that evidence is automatically court-admissible.
+        </p>
+        <p>
+          Signing mode <code>software</code> means device-protected key storage with software
+          Ed25519 — useful portable integrity, not ATTESTED hardware.
         </p>
         <p>
           <a href="../VERIFY.md">Recipient guide</a>
+          ·
+          <a href="../privacy/">Privacy policy</a>
         </p>
       </footer>
     </main>

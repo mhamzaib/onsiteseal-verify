@@ -11,8 +11,8 @@
   --success: #1b7a45;
   --danger: #c0392b;
   --warning: #9a6700;
-  --mono: "JetBrains Mono", ui-monospace, monospace;
-  --sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 * {
@@ -254,6 +254,32 @@ input[type="file"] {
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--surface);
+}
+
+.pair-list {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.pair {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--raised);
+}
+
+.pair-ok {
+  border-color: color-mix(in srgb, var(--success) 45%, var(--border));
+}
+
+.pair-bad {
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
+}
+
+.pair h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
 }
 
 .foot {

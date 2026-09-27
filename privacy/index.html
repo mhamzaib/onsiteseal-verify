@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="OnSiteSeal privacy policy: local-first jobs and photos, location for geotags, Nominatim/OSM reverse geocode when online, no OnSiteSeal cloud sync."
+    />
+    <title>OnSiteSeal — Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./privacy.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <main class="shell">
+      <header class="brand">
+        <p class="brand-name">OnSiteSeal</p>
+        <h1>Privacy Policy</h1>
+        <p class="meta">Last updated: 2026-09-26</p>
+        <p class="lede">
+          Sealed on site. Verifiable anywhere. Jobs and photos stay on your device unless you
+          share them. There is no OnSiteSeal account and no OnSiteSeal cloud sync in this MVP.
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="summary">
+        <h2 id="summary">Summary</h2>
+        <p>
+          OnSiteSeal is a local-first proof-of-work camera. Capture, watermark, sealed receipts,
+          PDFs, and backups live in the app on your phone. We do not run analytics or
+          crash-reporting SDKs in the current app. Reverse geocoding may send coordinates to
+          platform services or OpenStreetMap Nominatim when you are online.
+        </p>
+      </section>
+
+      <section class="panel" aria-labelledby="contact">
+        <h2 id="contact">Who we are / contact</h2>
+        <p>
+          Product: OnSiteSeal (<code>com.onsiteseal.app</code>).
+        </p>
+        <p>
+          <strong>Contact (placeholder):</strong> open an issue at
+          <a href="https://github.com/mhamzaib/onsiteseal">github.com/mhamzaib/onsiteseal</a>,
+          or email <a href="mailto:privacy@onsiteseal.com">privacy@onsiteseal.com</a> once that
+          mailbox is monitored. Replace this placeholder before production store listing.
+        </p>
+      </section>
+
+      <section class="panel" aria-labelledby="on-device">
+        <h2 id="on-device">Data on your device</h2>
+        <p>
+          The app stores job metadata, photos, GPS claims, optional photo labels/notes, proof
+          receipts, and reports in on-device storage (SQLite + app documents). An Ed25519 signing
+          seed is kept in platform SecureStore for sealing receipts.
+        </p>
+        <p>
+          Permissions: camera; precise and coarse location while using the app. We do not request
+          background location when the app is killed.
+        </p>
+      </section>
+
+      <section class="panel" aria-labelledby="off-device">
+        <h2 id="off-device">Data transmitted off your device</h2>
+        <h3>Reverse geocoding</h3>
+        <p>
+          When GPS quality is good and you are online, the app may reverse-geocode latitude and
+          longitude to a short address stamp:
+        </p>
+        <ul>
+          <li>
+            <strong>Platform / native geocoder first</strong> (via the OS). On many Android devices
+            this uses Google or OEM location services, which may receive your coordinates under
+            their policies.
+          </li>
+          <li>
+            <strong>Fallback: OpenStreetMap Nominatim</strong>
+            (<code>nominatim.openstreetmap.org</code>) over HTTPS, sending lat/lon and a product
+            User-Agent. OSM/Nominatim operators may log requests per their usage policies.
+          </li>
+        </ul>
+        <p>
+          Weak or unavailable GPS uses honest on-device stamps without inventing a street address
+          from a coarse pin.
+        </p>
+        <h3>Sharing you start</h3>
+        <p>
+          Share proof packs, job packs, PDFs, or backups through the OS share sheet. Files go to
+          the destination you choose — not to an OnSiteSeal cloud.
+        </p>
+        <h3>Browser verifier</h3>
+        <p>
+          The static verifier checks hashes and signatures in your browser. Proof files are not
+          uploaded to OnSiteSeal servers.
+        </p>
+        <h3>What we do not collect (MVP)</h3>
+        <ul>
+          <li>No OnSiteSeal accounts or cloud job sync</li>
+          <li>No first-party analytics SDK</li>
+          <li>No crash-reporting SDK</li>
+          <li>No advertising ID collection by OnSiteSeal</li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-labelledby="purpose">
+        <h2 id="purpose">Purpose / sharing / retention</h2>
+        <p>
+          We use on-device data to provide capture, geotag stamps, sealing, reports, and
+          backup/restore. We do not sell personal information or build advertising profiles from
+          app content.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Recipient</th>
+              <th>What</th>
+              <th>When</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Platform geocoder</td>
+              <td>Lat/lon</td>
+              <td>Native reverse geocode</td>
+            </tr>
+            <tr>
+              <td>OSM Nominatim</td>
+              <td>Lat/lon (HTTPS)</td>
+              <td>Fallback reverse geocode</td>
+            </tr>
+            <tr>
+              <td>Your share destinations</td>
+              <td>Files you export</td>
+              <td>Only when you share</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Retention on device lasts until you delete content, clear app storage, uninstall, or
+          restore a replace backup. Backup zips are unencrypted user exports; signing keys in
+          SecureStore are not included in backups. Third-party geocoders follow their own
+          retention rules. OnSiteSeal does not store your job library on our servers in this MVP.
+        </p>
+      </section>
+
+      <section class="panel" aria-labelledby="security">
+        <h2 id="security">Security (honest scope)</h2>
+        <ul>
+          <li>App sandbox storage; OS disk encryption when the device enables it.</li>
+          <li>
+            Signing seed in SecureStore; seal signatures are <strong>software Ed25519</strong>
+            — not hardware-attested Keystore/SE signing.
+          </li>
+          <li>Nominatim calls use HTTPS.</li>
+          <li>GPS spoofing on compromised devices cannot be ruled out absolutely.</li>
+        </ul>
+      </section>
+
+      <section class="panel" aria-labelledby="children">
+        <h2 id="children">Children’s privacy</h2>
+        <p>
+          OnSiteSeal is for contractors and trades, not directed at children under 13 (or the
+          equivalent minimum age where you live). We do not knowingly collect children’s personal
+          information. Contact us via the placeholder above for help removing on-device data
+          (uninstall / clear storage).
+        </p>
+      </section>
+
+      <section class="panel" aria-labelledby="choices">
+        <h2 id="choices">Your choices</h2>
+        <ul>
+          <li>Deny camera or location permissions (features will be limited).</li>
+          <li>Delete jobs/photos in the app, or uninstall to remove local data.</li>
+          <li>Stay offline to avoid reverse-geocode network calls (address may show coordinates).</li>
+          <li>Share packs only with people and services you trust.</li>
+        </ul>
+      </section>
+
+      <p class="note">
+        <strong>Hosting:</strong> Google Play needs a public HTTPS URL for this policy. Publish
+        this folder with the verifier site (e.g. GitHub Pages
+        <code>…/privacy/</code> next to onsiteseal-verify) or later on onsiteseal.com. Until then,
+        treat this page as the draft to host — do not invent a live URL.
+      </p>
+
+      <footer class="foot">
+        <p>
+          Canonical markdown:
+          <a href="https://github.com/mhamzaib/onsiteseal/blob/master/docs/PRIVACY.md"
+            >docs/PRIVACY.md</a
+          >
+          in the app repository.
+        </p>
+        <p>
+          <a href="../verify/">Verify a sealed photo</a>
+          ·
+          <a href="../VERIFY.md">Recipient guide</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

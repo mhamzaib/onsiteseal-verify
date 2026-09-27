@@ -2,54 +2,29 @@
 
 **Sealed on site. Verifiable anywhere.**
 
-Anyone with a sealed photo pack can confirm integrity in a browser — no OnSiteSeal account, and **no upload to our servers**. Checks are client-side and offline-capable once the page is loaded.
+Anyone with a sealed photo pack can confirm integrity in a browser — no OnSiteSeal account, and **no upload to our servers**. The verifier page is self-contained (no CDN) and offline-capable once loaded or saved.
 
 ## What you need
 
-From the contractor (via **Share proof pack** in the app):
-
-- A zip containing the sealed JPEG and matching `.receipt.json`, **or**
-- Those two files separately
+- A **single-photo** zip (JPEG + `.receipt.json`), or
+- A **whole-job** zip (`manifest.json` + every photo + matching receipts), or
+- JPEG + receipt chosen separately
 
 ## Steps
 
-1. Open https://mhamzaib.github.io/onsiteseal-verify/verify/
+1. Open https://mhamzaib.github.io/onsiteseal-verify/verify/ (or local `/verify/`)
 2. Drop the zip **or** choose the JPEG + receipt JSON
 3. Tap **Verify locally**
 
-The page checks:
+Every JPEG+receipt pair in a job pack is checked. Overall pass = all pairs passed. A photo without a matching receipt fails the pack (the page will not silently verify only the first file).
 
-- **Hash** — SHA-256 of the JPEG matches `photoHash` in the receipt
-- **Signature** — Ed25519 signature over the receipt claims verifies with the public key inside the receipt
+## Trust limits
 
-If both pass, the photo bytes and claims have not been altered since sealing.
+A pass proves internal consistency with the **public key inside each receipt**. It does not prove the key came from a genuine OnSiteSeal install or hardware attestation — a replaced photo+receipt pair signed with any key can still pass. ATTESTED is not shipped.
 
-## What “Locked in” / SEALED means
+## What verification does not prove
 
-**Locked in** in the app = cryptographic seal (hash + signature). That is separate from GPS quality stamped on the photo (`LOCATION CHECKED` / `WEAK` / `UNAVAILABLE`).
-
-| Passes | Meaning |
-|--------|---------|
-| Hash match | This exact JPEG is the one named in the receipt |
-| Signature valid | Claims (time, GPS, job, hash, …) were signed by the device key in the receipt |
-
-Signing mode `software` means device-protected key storage with software Ed25519 (not a hardware secure element). Useful portable integrity — **not ATTESTED**.
-
-## What verification does **not** prove
-
-- That the camera was pointed at a particular subject
-- That GPS could not be spoofed on a compromised device
-- That the device clock was correct
-- Identity of the person who held the phone
-- Hardware / app attestation
-- Automatic court admissibility
-
-Use seals as strong documentary evidence, not a substitute for judgment on site context.
-
-## Saved only vs Locked in
-
-- **Saved only (BASIC)** — saved photo; unsigned or seal failed. Documentation only.
-- **Locked in (SEALED)** — hash + signature present. Use this verifier for independent checks.
+Subject authenticity, unspoofable GPS, correct clock, who held the phone, court admissibility.
 
 ## Privacy
 

@@ -8,12 +8,7 @@
       content="Verify an OnSiteSeal proof pack offline in your browser. Files stay on your device — nothing is uploaded to OnSiteSeal."
     />
     <title>OnSiteSeal — Verify proof</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- System fonts only — no CDN so a cached/offline page still verifies. -->
     <link rel="stylesheet" href="./verify.css" />
   </head>
   <body>
@@ -24,15 +19,17 @@
         <h1>Verify a sealed photo</h1>
         <p class="lede">
           Sealed on site. Verifiable anywhere. Hash and signature checks run entirely in your
-          browser — offline-capable, no account, and we never receive your files.
+          browser — works offline after this page is saved or cached. No account, and we never
+          receive your files.
         </p>
       </header>
 
       <section class="panel" aria-labelledby="drop-heading">
         <h2 id="drop-heading">Drop a proof pack</h2>
         <p class="hint">
-          Use the zip from <strong>Share proof pack</strong> in the app, or pick the JPEG and
-          <code>.receipt.json</code> separately. Nothing is sent to OnSiteSeal.
+          Use a <strong>single-photo</strong> zip or a <strong>whole-job</strong> zip (all photos
+          checked). Or pick one JPEG and its <code>.receipt.json</code>. Nothing is sent to
+          OnSiteSeal.
         </p>
 
         <label class="file-field">
@@ -62,12 +59,15 @@
       <footer class="foot">
         <p>
           What a pass proves: the JPEG bytes match the receipt hash (SHA-256), and the receipt
-          claims were signed with the device key embedded in the receipt (Ed25519).
+          claims were signed with the <strong>public key embedded in that receipt</strong>
+          (Ed25519). Whole-job zips are checked photo-by-photo — overall pass means every pair
+          passed.
         </p>
         <p>
-          What it does <strong>not</strong> prove: what the camera was pointed at, that GPS could
-          not be spoofed on a compromised device, that the clock was correct, who held the phone,
-          hardware attestation, or that evidence is automatically court-admissible.
+          What it does <strong>not</strong> prove: that the key came from a genuine OnSiteSeal
+          install or hardware attestation (a replaced photo+receipt pair signed with any key can
+          still “pass”), what the camera was pointed at, unspoofable GPS, correct clock, who held
+          the phone, or court admissibility.
         </p>
         <p>
           Signing mode <code>software</code> means device-protected key storage with software
@@ -80,6 +80,7 @@
         </p>
       </footer>
     </main>
-    <script type="module" src="./verify.js"></script>
+    <!-- Self-contained bundle (no esm.sh). Rebuild: npm run build:verifier -->
+    <script type="module" src="./verify.bundle.js"></script>
   </body>
 </html>
